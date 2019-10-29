@@ -3,4 +3,4 @@ import(grid)
 import(dplyr)
 import(tidyr)
 import(magrittr)
-
+importFrom(magrittr,"%>%")
