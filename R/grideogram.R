@@ -1,3 +1,4 @@
+
 color_coding = c('gneg'=gray(1), 'gpos25' = gray(0.75), 'gpos50'  = gray(0.5), 'gpos75'=gray(0.25), 'gpos100'=gray(0), 'gvar'='#87CEFA', 'acen1'='#AA3C28', 'acen2'='#AA3C28', 'stalk'='#6D7FA3')
 is_centromere = c('gneg'=0, 'gpos25' = 0, 'gpos50'  = 0, 'gpos75'=0, 'gpos100'=0, 'gvar'=0, 'acen1'=1, 'acen2'=2, 'stalk'=0)
 scale_conversion  <- function(pos, min_pos, max_pos){
