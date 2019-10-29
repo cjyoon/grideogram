@@ -73,7 +73,7 @@ draw_ideogram <- function(ideo_chrom, ideo_start='', ideo_end='', ref='grch37', 
   cyto_df_roi[dim(cyto_df_roi)[1], 'end'] = ideo_end
   x_adjust = min(cyto_df_roi$start)
   if(adjust==T){
-    cyto_df_roi = cyto_df_roi %>% mutate(start = start-x_adjust) %>% mutate(end = end - x_adjust)
+    cyto_df_roi = cyto_df_roi %>% dplyr::mutate(start = start-x_adjust) %>% dplyr::mutate(end = end - x_adjust)
   }
 
 
