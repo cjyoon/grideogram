@@ -1,0 +1,17 @@
+Package: grideogram
+Type: Package
+Title: Draws chromosomal ideograms using R grid graphics system. 
+Version: 0.1.0
+Authors@R: person("Christopher J ", "Yoon", email="cjyoon29@gmailcom", role=c('aut', 'cre'))
+Description: Draws chromosomal ideograms using R grid graphics system. 
+    Allows user to control the locations and fragments of ideograms. 
+License: MIT + file LICENSE
+Depends: R (>= 3.0.1)
+Encoding: UTF-8
+LazyData: true
+Imports:
+    grid,
+    dplyr,
+    magrittr,
+    tidyr
+RoxygenNote: 6.1.1
