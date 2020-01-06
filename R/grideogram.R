@@ -1,5 +1,5 @@
 
-color_coding = c('gneg'=gray(1), 'gpos25' = gray(0.75), 'gpos50'  = gray(0.5), 'gpos75'=gray(0.25), 'gpos100'=gray(0), 'gvar'='#87CEFA', 'acen1'='#AA3C28', 'acen2'='#AA3C28', 'stalk'='#6D7FA3')
+color_coding = c('gneg'=gray(1), 'gpos25' = gray(0.75), 'gpos50'  = gray(0.5), 'gpos75'=gray(0.25), 'gpos100'=gray(0), 'gvar'='#87CEFA', 'acen'='#AA3C28','acen1'='#AA3C28', 'acen2'='#AA3C28', 'stalk'='#6D7FA3')
 is_centromere = c('gneg'=0, 'gpos25' = 0, 'gpos50'  = 0, 'gpos75'=0, 'gpos100'=0, 'gvar'=0, 'acen1'=1, 'acen2'=2, 'stalk'=0)
 scale_conversion  <- function(pos, min_pos, max_pos){
   return (pos-min_pos)/max_pos
@@ -67,7 +67,7 @@ draw_ideogram <- function(ideo_chrom, ideo_start='', ideo_end='', ref='grch37', 
   if(dim(cyto_df_roi)[1]==0){
     cyto_df_roi = cyto_df%>% dplyr::filter(chromosome==ideo_chrom) %>% dplyr::filter(start < ideo_start & end > ideo_start)  }
   # cut off the first column with ideo_start
-  # print(cyto_df)
+  print(cyto_df)
   cyto_df_roi[1,'start'] = ideo_start
 
   # cut off the last column with ideo_end
@@ -77,7 +77,9 @@ draw_ideogram <- function(ideo_chrom, ideo_start='', ideo_end='', ref='grch37', 
     cyto_df_roi = cyto_df_roi %>% dplyr::mutate(start = start-x_adjust) %>% dplyr::mutate(end = end - x_adjust)
   }
 
-
+  print(unique(cyto_df_roi$stain))
+  print(cyto_df_roi$stain)
+  print(length(unique(cyto_df_roi$stain)))
 
   if(inv==T){
     rotate_start = max(cyto_df_roi$end) - cyto_df_roi$end
