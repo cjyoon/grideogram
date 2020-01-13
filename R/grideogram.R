@@ -61,13 +61,11 @@ draw_ideogram <- function(ideo_chrom, ideo_start='', ideo_end='', ref='grch37', 
     ideo_end = chrom_max
   }
 
-  print(cyto_df)
   # cyto_df_roi = cyto_df %>% filter(chromosome==ideo_chrom) %>% filter(start >= ideo_start) %>% filter(end <= ideo_end)
   cyto_df_roi = cyto_df %>% dplyr::filter(chromosome==ideo_chrom) %>% dplyr::filter(start >= ideo_start) %>% dplyr::filter(end <= ideo_end)
   if(dim(cyto_df_roi)[1]==0){
     cyto_df_roi = cyto_df%>% dplyr::filter(chromosome==ideo_chrom) %>% dplyr::filter(start < ideo_start & end > ideo_start)  }
   # cut off the first column with ideo_start
-  print(cyto_df)
   cyto_df_roi[1,'start'] = ideo_start
 
   # cut off the last column with ideo_end
@@ -77,9 +75,6 @@ draw_ideogram <- function(ideo_chrom, ideo_start='', ideo_end='', ref='grch37', 
     cyto_df_roi = cyto_df_roi %>% dplyr::mutate(start = start-x_adjust) %>% dplyr::mutate(end = end - x_adjust)
   }
 
-  print(unique(cyto_df_roi$stain))
-  print(cyto_df_roi$stain)
-  print(length(unique(cyto_df_roi$stain)))
 
   if(inv==T){
     rotate_start = max(cyto_df_roi$end) - cyto_df_roi$end
