@@ -1,5 +1,5 @@
 # prep_data
-library(tidyverse)
+# library(tidyverse)
 
 # grch37 = read_delim('~/Documents/cjyoon/scripts/grideogram/inst/extdata/grch37_cytoBandIdeo.txt', delim='\t', col_names=c('chromosome', 'start', 'end', 'band', 'stain'))
 # grch38 = read_delim('~/Documents/cjyoon/scripts/grideogram/inst/extdata/grch38_cytoBandIdeo.txt', delim='\t', col_names=c('chromosome', 'start', 'end', 'band', 'stain'))
