@@ -20,7 +20,7 @@ inverse_is_centro_vec <- Vectorize(inverse_is_centro)
 #' @param ideo_chrom chromosome with chr[0-9XY]+ to draw
 #' @param ideo_start starting position of the fragment for drawing ideogram
 #' @param ideo_end ending position of the fragment for drawing ideogram
-#' @param ref Reference assembly build. Either grch37 or grch38. Defautl: grch37
+#' @param ref Reference assembly build. Either grch37 or grch38. Default: grch37
 #' @param scale_factor size conversion factor. scale factor of 300M (default) will draw 300M in the full width of the grid
 #' @param xpos, ypos (x, y) coordinate position in 'npc' unit
 #' @param height height of the ideogram in 'npc' unit
@@ -28,7 +28,7 @@ inverse_is_centro_vec <- Vectorize(inverse_is_centro)
 #' @param adjust if set to TRUE, will left align the fragment to \code{xpos}
 #' @param inv if set to TRUE will draw inverted fragment
 #' @param label_x_pos align label to either 'center', 'left', or 'right' side of the ideogram.
-#' @param disable_heterochromatin heterochromatin region is displayed as white color rather than blue
+#' @param disable_heterochromatin heterochromatin region is displayed as white rather than blue
 #' @return grobs of ideogram object with label
 #' @export
 #' @examples

@@ -4,10 +4,21 @@
 \alias{draw_ideogram}
 \title{Draw ideogram of a chromosome}
 \usage{
-draw_ideogram(ideo_chrom, ideo_start = "", ideo_end = "",
-  ref = grch37, scale_factor = 3e+08, xpos = 0, ypos = 0,
-  height = 0.1, label = NA, adjust = T, inv = F,
-  label_x_pos = "center")
+draw_ideogram(
+  ideo_chrom,
+  ideo_start = "",
+  ideo_end = "",
+  ref = "grch37",
+  scale_factor = 300000000,
+  xpos = 0,
+  ypos = 0,
+  height = 0.1,
+  label = NA,
+  adjust = T,
+  inv = F,
+  label_x_pos = "center",
+  disable_heterochromatin = F
+)
 }
 \arguments{
 \item{ideo_chrom}{chromosome with chr[0-9XY]+ to draw}
@@ -16,7 +27,7 @@ draw_ideogram(ideo_chrom, ideo_start = "", ideo_end = "",
 
 \item{ideo_end}{ending position of the fragment for drawing ideogram}
 
-\item{ref}{Reference assembly build. Either grch37 or grch38. Defautl: grch37}
+\item{ref}{Reference assembly build. Either grch37 or grch38. Default: grch37}
 
 \item{scale_factor}{size conversion factor. scale factor of 300M (default) will draw 300M in the full width of the grid}
 
@@ -31,6 +42,8 @@ draw_ideogram(ideo_chrom, ideo_start = "", ideo_end = "",
 \item{inv}{if set to TRUE will draw inverted fragment}
 
 \item{label_x_pos}{align label to either 'center', 'left', or 'right' side of the ideogram.}
+
+\item{disable_heterochromatin}{heterochromatin region is displayed as white rather than blue}
 }
 \value{
 grobs of ideogram object with label
@@ -39,7 +52,7 @@ grobs of ideogram object with label
 Draw ideogram of a chromosome
 }
 \examples{
-draw_ideogram('chr1', 120000000, 200000000, ref=grch37, xpos=0.1, ypos=0.3, height=0.1, adjust=F, inv=T, label_x_pos='left')
+draw_ideogram('chr1', 120000000, 200000000, ref='grch37', xpos=0.1, ypos=0.3, height=0.1, adjust=F, inv=T, label_x_pos='left')
 draw_ideogram('chr22')
-draw_ideogram('chr10', 120000000, 200000000, ref=grch38, xpos=0.1, ypos=0.3, height=0.1, adjust=F, inv=T, label_x_pos='left')
+draw_ideogram('chr10', 120000000, 200000000, ref='grch38', xpos=0.1, ypos=0.3, height=0.1, adjust=F, inv=T, label_x_pos='left')
 }
