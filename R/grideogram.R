@@ -1,5 +1,3 @@
-
-color_coding = c('gneg'=gray(1), 'gpos25' = gray(0.75), 'gpos50'  = gray(0.5), 'gpos75'=gray(0.25), 'gpos100'=gray(0), 'gvar'='#87CEFA', 'acen'='#AA3C28','acen1'='#AA3C28', 'acen2'='#AA3C28', 'stalk'='#6D7FA3')
 is_centromere = c('gneg'=0, 'gpos25' = 0, 'gpos50'  = 0, 'gpos75'=0, 'gpos100'=0, 'gvar'=0, 'acen1'=1, 'acen2'=2, 'stalk'=0)
 scale_conversion  <- function(pos, min_pos, max_pos){
   return (pos-min_pos)/max_pos
@@ -30,13 +28,20 @@ inverse_is_centro_vec <- Vectorize(inverse_is_centro)
 #' @param adjust if set to TRUE, will left align the fragment to \code{xpos}
 #' @param inv if set to TRUE will draw inverted fragment
 #' @param label_x_pos align label to either 'center', 'left', or 'right' side of the ideogram.
+#' @param disable_heterochromatin heterochromatin region is displayed as white color rather than blue
 #' @return grobs of ideogram object with label
 #' @export
 #' @examples
 #' draw_ideogram('chr1', 120000000, 200000000, ref='grch37', xpos=0.1, ypos=0.3, height=0.1, adjust=F, inv=T, label_x_pos='left')
 #' draw_ideogram('chr22')
 #' draw_ideogram('chr10', 120000000, 200000000, ref='grch38', xpos=0.1, ypos=0.3, height=0.1, adjust=F, inv=T, label_x_pos='left')
-draw_ideogram <- function(ideo_chrom, ideo_start='', ideo_end='', ref='grch37', scale_factor=300000000, xpos=0, ypos=0, height = 0.1, label=NA, adjust=T, inv=F, label_x_pos='center'){
+draw_ideogram <- function(ideo_chrom, ideo_start='', ideo_end='', ref='grch37', scale_factor=300000000, xpos=0, ypos=0, height = 0.1, label=NA, adjust=T, inv=F, label_x_pos='center', disable_heterochromatin=F){
+  if(disable_heterochromatin==T){
+    heterochromatin_color = gray(1) # white
+  }else{
+    heterochromatin_color = '#87CEFA'
+  }
+    color_coding = c('gneg'=gray(1), 'gpos25' = gray(0.75), 'gpos50'  = gray(0.5), 'gpos75'=gray(0.25), 'gpos100'=gray(0), 'gvar'=heterochromatin_color, 'acen'='#AA3C28','acen1'='#AA3C28', 'acen2'='#AA3C28', 'stalk'='#6D7FA3')
 
   if(is.na(scale_factor)){
     scale_factor = ideo_end-ideo_start
@@ -62,7 +67,8 @@ draw_ideogram <- function(ideo_chrom, ideo_start='', ideo_end='', ref='grch37', 
   }
 
   # cyto_df_roi = cyto_df %>% filter(chromosome==ideo_chrom) %>% filter(start >= ideo_start) %>% filter(end <= ideo_end)
-  cyto_df_roi = cyto_df %>% dplyr::filter(chromosome==ideo_chrom) %>% dplyr::filter(start >= ideo_start) %>% dplyr::filter(end <= ideo_end)
+  # cyto_df_roi = cyto_df %>% dplyr::filter(chromosome==ideo_chrom) %>% dplyr::filter(start >= ideo_start) %>% dplyr::filter(end <= ideo_end)
+  cyto_df_roi = cyto_df %>% dplyr::filter(chromosome==ideo_chrom) %>% dplyr::filter(between(start, ideo_start, ideo_end) | between(end, ideo_start, ideo_end))
   if(dim(cyto_df_roi)[1]==0){
     cyto_df_roi = cyto_df%>% dplyr::filter(chromosome==ideo_chrom) %>% dplyr::filter(start < ideo_start & end > ideo_start)  }
   # cut off the first column with ideo_start
